@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.myForm {
+  width: 250px;
+  height: 100px;
+  background-color: darkblue;
+  padding: 10px;
+  margin: 10px;
+  color: yellow;
+  box-shadow: 10px 10px 10px blue;
+}
+
+.users {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user {
+  width: 180px;
+  box-shadow: 10px 10px 10px blue;
+  position: relative;
+  background-color: darkblue;
+  color: yellow;
+  margin: 20px 10px;
+  padding: 5px;
+
+}
+.user img {
+  width: 100%;
+}
+.close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: darkred;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  transform: translate(50%, -50%);
+}
+
