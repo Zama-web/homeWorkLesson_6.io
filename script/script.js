@@ -19,19 +19,22 @@ function saveChange() {
   cur.remove();
 }
 
-function getUserById () {
+function getUserById(id) {
+  let url = `https://reqres.in/api/users?delay=${id}`;
+
   $.ajax({
-    url: 'https://reqres.in/api/users',
+    type: 'GET',
+    url,
     success: function(data) {
       userInfo(data);
-    }
+    },
   })
 }
 
 function userInfo(data){
   for (let i=0; i<data.data.length; i++){
-  let userId = data.data[i];
-  console.log(userId);
+  let user = data.data[i];
+  console.log(data.data[i]);
 
   let container = $('<div>');
   let containerName = $('<h2>');
@@ -47,9 +50,9 @@ function userInfo(data){
     $(this).closest('.user').remove();
   })
 
-  containerName.text(userId.first_name + ' ' + userId.last_name);
-  containerEmail.text(userId.email);
-  containerAvatar.attr('src', userId.avatar);
+  containerName.text(user.first_name + ' ' + user.last_name);
+  containerEmail.text(user.email);
+  containerAvatar.attr('src', user.avatar);
 
   container.append(containerName);
   container.append(containerEmail);
@@ -58,7 +61,9 @@ function userInfo(data){
 
   containerName.on('dblclick', changeVal)
 
-  $('.users').append(container);
+  $('.users').append(container); 
+  
+  return container;
   }
 }
 
@@ -68,6 +73,6 @@ $('.myForm').on('submit', function(event){
   let title = $('#title').val();
   console.log(title);
 
-  $('.users').append(getUserById());
+  $('.users').append(getUserById(title));
 })
 
