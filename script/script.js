@@ -12,7 +12,7 @@ function changeVal() {
 function saveChange() {
   let cur = $(this);
   let curText = cur.val();
-  let h2_elem = $('<h4>');
+  let h2_elem = $('<h2>');
   h2_elem.text(curText);
   let parent = cur.closest('div');
   parent.prepend(h2_elem);
@@ -20,21 +20,18 @@ function saveChange() {
 }
 
 function getUserById(id) {
-  let url = `https://reqres.in/api/users?delay=${id}`;
+  let url = `https://reqres.in/api/users/` + `${id}`;
 
   $.ajax({
     type: 'GET',
     url,
-    success: function(data) {
-      userInfo(data);
+    success: function (data) {
+      userInfo(data.data);
     },
   })
 }
 
-function userInfo(data){
-  for (let i=0; i<data.data.length; i++){
-  let user = data.data[i];
-  console.log(data.data[i]);
+function userInfo(user) {
 
   let container = $('<div>');
   let containerName = $('<h2>');
@@ -61,18 +58,17 @@ function userInfo(data){
 
   containerName.on('dblclick', changeVal)
 
-  $('.users').append(container); 
-  
+  $('.users').append(container);
+
   return container;
-  }
 }
 
 
-$('.myForm').on('submit', function(event){
+$('.myForm').on('submit', function(event) {
   event.preventDefault();
   let title = $('#title').val();
-  console.log(title);
-
-  $('.users').append(getUserById(title));
+  if (title) {
+    getUserById(title);
+  }
 })
 
